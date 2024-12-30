@@ -1,0 +1,64 @@
+# Ignore Maven and Gradle directories
+/.mvn/
+/.gradle/
+/build/
+/build/*
+.name
+# Ignore Gradle Wrapper files
+.gradle/
+/gradle-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# IntelliJ IDEA specific files
+/.idea/
+/*.iml
+*.ipr
+*.iws
+
+# Eclipse specific files
+/.settings/
+/.project
+/.classpath
+
+# VS Code specific files
+/.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Node Modules (if you use Node.js with your Spring Boot project)
+/node_modules/
+
+# Application-specific
+*.war
+*.jar
+*.ear
+
+# Database files
+*.db
+
+# Environment and sensitive configuration files
+.env
+*.key
+*.crt
+*.pem
+*.pfx
+*.p12
+secrets/
+credentials/
+
+# Test reports
+/test-output/
+/out/
+/target/
+/reports/
+
+# Temporary files
+*.swp
+*.tmp
+*.bak
+*.pid

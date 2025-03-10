@@ -3,10 +3,16 @@ spring:
     init:
       schema-locations: classpath:init-schema.sql
       mode: always  # Ensures schema is loaded on startup
+
   r2dbc:
-    url: r2dbc:h2:mem:///testdb?DB_CLOSE_DELAY=-1
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
     username: sa
     password:
+    r2dbc.pool:
+      enabled: true
+      initial-size: 10
+      max-size: 20
+      validation-query: SELECT 1
 
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
@@ -26,4 +32,3 @@ logging:
     org.springframework.jdbc: DEBUG
     com.zaxxer.hikari: DEBUG
     org.h2: DEBUG
-

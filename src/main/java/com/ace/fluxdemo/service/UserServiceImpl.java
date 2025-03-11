@@ -14,9 +14,11 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class userServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
 
     @Override
     public Mono<UserResponse> getUser(String userId) {
@@ -28,7 +30,7 @@ public class userServiceImpl implements UserService {
                     } else {
                         log.info("No user found with id {}", userId);
                     }
-                }).map(UserMapper.INSTANCE::toResponse)
+                }).map(user ->  userMapper.toResponse(user))
                 .doOnError(throwable -> log.error("Get User DB error : ", throwable))
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
 
@@ -41,7 +43,7 @@ public class userServiceImpl implements UserService {
                 .doOnSubscribe(s -> log.info("Subscribed to findById"))
                 .doOnNext(user -> log.info("User found: {}", user.getUsername()))
                 .doOnError(throwable -> log.error("Get Users DB error : ", throwable))
-                .map(UserMapper.INSTANCE::toResponse)
+                .map(userMapper::toResponse)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
     }
 
